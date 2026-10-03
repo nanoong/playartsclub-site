@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>플레이아츠 주니어클럽 · 초등 4~6학년 연극·음악 클럽</title>
+<meta name="description" content="학원은 머리를 채우고, 여기서는 스트레스를 비웁니다. 성북구 석관동, 혜림쌤의 초등 고학년 연극·음악 클럽.">
+<meta property="og:title" content="플레이아츠 주니어클럽">
+<meta property="og:description" content="학원은 머리를 채우고, 여기서는 스트레스를 비웁니다.">
+<meta property="og:image" content="https://playartsclub.kr/images/hero.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&family=Gaegu:wght@400;700&display=swap">
+<style>
+:root{
+  --paper:#FFF8F2; --peach:#FFD9C7; --peach2:#FFEBDF; --coral:#E8553E; --coralInk:#B83A26;
+  --cocoa:#3D2B22; --cocoa2:#6E5446; --butter:#FFE59A; --leaf:#8BBF7A; --line:#F0D3C3; --card:#FFFFFF;
+  --hand:"Gaegu",sans-serif; --disp:"Jua","Apple SD Gothic Neo",sans-serif; --body:"Gowun Dodum","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(76px + env(safe-area-inset-top,0px))}
+body{margin:0;background:var(--paper);color:var(--cocoa);font-family:var(--body);font-size:17px;line-height:1.75;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3{font-family:var(--disp);font-weight:400;margin:0;line-height:1.3;letter-spacing:-.01em}
+p{margin:0}
+button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
+:focus-visible{outline:3px solid var(--coral);outline-offset:3px;border-radius:6px}
+.hand{font-family:var(--hand);color:var(--coralInk);font-size:24px;line-height:1.2}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+section{padding:96px 0}
+
+/* 상단 */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,248,242,.92);backdrop-filter:blur(8px);border-bottom:1px solid transparent;transition:border-color .2s}
+.top.scrolled{border-bottom-color:var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--disp);font-size:21px}
+.logo i{width:30px;height:30px;border-radius:50% 50% 46% 54%/58% 56% 44% 42%;background:var(--peach);border:2.5px solid var(--cocoa);display:inline-block;position:relative}
+.logo i::before,.logo i::after{content:"";position:absolute;top:10px;width:4px;height:4px;border-radius:50%;background:var(--cocoa)}
+.logo i::before{left:8px}.logo i::after{right:8px}
+.nav{display:flex;gap:22px;font-size:16px}
+.nav a{text-decoration:none;color:var(--cocoa2)}
+.nav a:hover{color:var(--cocoa)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:14px;background:var(--coral);color:#fff;text-decoration:none;font-family:var(--disp);font-size:18px;border:2.5px solid var(--cocoa);box-shadow:3px 3px 0 var(--cocoa);transition:transform .12s, box-shadow .12s}
+.btn:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--cocoa)}
+.btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--cocoa)}
+.btn.ghost{background:var(--card);color:var(--cocoa)}
+.top .btn{min-height:42px;font-size:16px;padding:0 16px}
+@media (max-width:820px){.nav{display:none}}
+
+/* 히어로 */
+.hero{padding:56px 0 80px;position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.hero h1{font-size:clamp(40px,6vw,68px);line-height:1.18}
+.flipline{margin-top:22px;font-family:var(--disp);font-size:clamp(22px,2.8vw,30px);color:var(--cocoa2);display:flex;flex-wrap:wrap;align-items:baseline;gap:.35em}
+.flip{display:inline-block;position:relative;min-width:6.5em;height:1.35em;overflow:hidden;vertical-align:bottom}
+.flip span{position:absolute;left:0;top:0;white-space:nowrap;color:var(--coralInk);transform:translateY(110%);transition:transform .45s cubic-bezier(.3,1.4,.5,1)}
+.flip span.on{transform:translateY(0)}
+.flip span.out{transform:translateY(-110%)}
+.hero .lead{margin-top:20px;max-width:30em;color:var(--cocoa2)}
+.hero .ctas{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
+.status{margin-top:22px;font-size:14px;color:var(--cocoa2);display:flex;align-items:center;gap:8px}
+.status b{width:8px;height:8px;border-radius:50%;background:var(--leaf);display:inline-block;box-shadow:0 0 0 4px rgba(139,191,122,.25)}
+.stage{position:relative;aspect-ratio:1/1}
+.stage .photo{position:absolute;inset:6% 4% 8% 8%;border-radius:46% 54% 50% 50%/44% 48% 52% 56%;overflow:hidden;border:3px solid var(--cocoa);background:var(--peach)}
+.stage .photo img{width:100%;height:100%;object-fit:cover}
+.mascot{position:absolute;width:24%;aspect-ratio:1/1;border-radius:50%;overflow:visible;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.mascot img{width:100%;height:100%;object-fit:cover;border-radius:50%;border:3px solid var(--cocoa);background:#fff}
+.mascot.m1{left:-2%;top:2%}.mascot.m2{right:-2%;top:12%}.mascot.m3{left:2%;bottom:0}.mascot.m4{right:4%;bottom:-2%}
+.mascot.boing img{animation:boing .55s cubic-bezier(.3,1.6,.5,1)}
+@keyframes boing{0%{transform:scale(1)}30%{transform:scale(1.18,.86)}60%{transform:scale(.92,1.1)}100%{transform:scale(1)}}
+.bubble{position:absolute;left:50%;bottom:104%;transform:translateX(-50%) scale(.6);opacity:0;background:#fff;border:2.5px solid var(--cocoa);border-radius:16px;padding:6px 12px;font-family:var(--hand);font-size:19px;white-space:nowrap;pointer-events:none;transition:opacity .18s,transform .25s cubic-bezier(.3,1.6,.5,1)}
+.bubble.show{opacity:1;transform:translateX(-50%) scale(1)}
+.tapnote{position:absolute;right:6%;top:-4%;font-family:var(--hand);font-size:20px;color:var(--coralInk);transform:rotate(6deg)}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr}.stage{max-width:440px;margin:0 auto;width:100%}}
+
+/* 공통 머리 */
+.head{max-width:640px;margin-bottom:44px}
+.head h2{font-size:clamp(30px,4vw,44px)}
+.head p{margin-top:12px;color:var(--cocoa2)}
+
+/* 활동 */
+.acts{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.act{text-align:left;background:var(--card);border:2.5px solid var(--cocoa);border-radius:26px;padding:16px;display:flex;flex-direction:column;gap:14px;transition:background .2s}
+.act:nth-child(2){transform:translateY(28px)}
+.act img{border-radius:18px;aspect-ratio:1/1;object-fit:cover;width:100%}
+.act h3{font-size:24px;padding:0 6px}
+.act .more{padding:0 6px 6px;color:var(--cocoa2);font-size:16px;max-height:0;overflow:hidden;transition:max-height .35s ease}
+.act[aria-expanded="true"]{background:var(--peach2)}
+.act[aria-expanded="true"] .more{max-height:220px}
+.act .tog{font-family:var(--hand);font-size:19px;color:var(--coralInk);padding:0 6px}
+@media (max-width:820px){.acts{grid-template-columns:1fr}.act:nth-child(2){transform:none}}
+
+/* 한 시간 흐름 */
+.flow{background:var(--peach)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:2.5px solid var(--cocoa)}
+.step{padding:22px 18px 8px;border-right:2px dashed rgba(61,43,34,.35)}
+.step:last-child{border-right:0}
+.step .t{font-family:var(--hand);font-size:22px;color:var(--coralInk)}
+.step h3{font-size:22px;margin:4px 0 8px}
+.step p{font-size:16px;color:var(--cocoa2)}
+@media (max-width:820px){.steps{grid-template-columns:1fr 1fr}.step:nth-child(2){border-right:0}.step:nth-child(3),.step:nth-child(4){border-top:2px dashed rgba(61,43,34,.35)}}
+
+/* 시간표 */
+.sched{display:grid;grid-template-columns:1.2fr .8fr;gap:36px;align-items:start}
+.days{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.day{background:var(--card);border:2.5px solid var(--cocoa);border-radius:22px;padding:16px}
+.day h3{font-size:24px;margin-bottom:10px}
+.slot{display:block;width:100%;text-align:left;border:2px solid var(--line);border-radius:14px;padding:12px 14px;margin-top:8px;background:var(--paper);font-size:16px;line-height:1.4;transition:border-color .15s, background .15s}
+.slot b{font-family:var(--disp);font-weight:400;font-size:20px;display:block}
+.slot:hover{border-color:var(--coral)}
+.slot[aria-pressed="true"]{background:var(--butter);border-color:var(--cocoa)}
+.picked{background:var(--card);border:2.5px solid var(--cocoa);border-radius:26px;padding:24px;position:sticky;top:96px}
+.picked h3{font-size:24px}
+.picked .sel{margin:12px 0 18px;font-size:16px;color:var(--cocoa2);min-height:54px}
+.picked ul{margin:16px 0 0;padding-left:18px;font-size:15px;color:var(--cocoa2)}
+@media (max-width:860px){.sched{grid-template-columns:1fr}.days{grid-template-columns:1fr}.picked{position:static}}
+
+/* 포트폴리오 */
+.port{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:center}
+.port img{border-radius:30px;border:3px solid var(--cocoa);transform:rotate(-2deg)}
+.port .note{margin-top:22px;padding:18px 20px;border-left:4px solid var(--coral);background:var(--card);border-radius:0 16px 16px 0;font-size:16px}
+@media (max-width:860px){.port{grid-template-columns:1fr}}
+
+/* 유형 */
+.types{background:var(--cocoa);color:#FFF1E8}
+.types .head p{color:#F1D6C8}
+.types .hand{color:var(--butter)}
+.tgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.tcard{background:#4D382D;border-radius:24px;padding:18px;text-align:center}
+.tcard img{border-radius:18px;margin:0 auto 12px;width:100%;aspect-ratio:1/1;object-fit:cover}
+.tcard h3{font-size:21px}
+.tcard p{font-size:15px;color:#E9CDBF}
+.types .btn{margin-top:36px}
+@media (max-width:820px){.tgrid{grid-template-columns:1fr 1fr}}
+
+/* 선생님 */
+.teacher{display:grid;grid-template-columns:.75fr 1.25fr;gap:48px;align-items:start}
+.portrait{aspect-ratio:3/4;border-radius:200px 200px 28px 28px;border:3px solid var(--cocoa);background:var(--peach2);overflow:hidden;box-shadow:6px 6px 0 var(--peach)}
+.portrait img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.cv{list-style:none;margin:20px 0 0;padding:0}
+.cv li{padding:12px 0;border-bottom:1.5px dashed var(--line);display:flex;gap:14px}
+.cv li span:first-child{font-family:var(--hand);font-size:19px;color:var(--coralInk);min-width:4.2em}
+.why{margin-top:28px;font-size:15px;color:var(--cocoa2)}
+.why sup{color:var(--coralInk)}
+@media (max-width:860px){.teacher{grid-template-columns:1fr}.portrait{max-width:300px}}
+
+/* 설명회 */
+.session{background:var(--peach)}
+.ticket{display:grid;grid-template-columns:auto 1fr;background:var(--card);border:3px solid var(--cocoa);border-radius:30px;overflow:hidden}
+.ticket .date{background:var(--coral);color:#fff;padding:34px 36px;border-right:3px dashed var(--cocoa);display:flex;flex-direction:column;justify-content:center}
+.ticket .date b{font-family:var(--disp);font-weight:400;font-size:clamp(64px,9vw,96px);line-height:1}
+.ticket .date span{font-family:var(--disp);font-size:24px}
+.ticket .info{padding:32px 34px;display:flex;flex-direction:column;gap:10px}
+.ticket .info h3{font-size:clamp(24px,3vw,32px)}
+.ticket .info p{color:var(--cocoa2)}
+.ticket .row{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px}
+@media (max-width:720px){.ticket{grid-template-columns:1fr}.ticket .date{border-right:0;border-bottom:3px dashed var(--cocoa)}}
+
+/* 자주 묻는 질문 */
+.faq{max-width:760px}
+.faq details{border-bottom:2px dashed var(--line);padding:18px 4px}
+.faq summary{cursor:pointer;font-family:var(--disp);font-size:21px;list-style:none;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--disp);color:var(--coral);font-size:26px;line-height:1;transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{margin-top:10px;color:var(--cocoa2)}
+
+footer{padding:56px 0 72px;font-size:14px;color:var(--cocoa2);border-top:2px solid var(--line)}
+footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+footer small{display:block;margin-top:6px}
+.fn{margin-top:14px;font-size:13px;line-height:1.6;max-width:560px}
+
+
+/* ===== 움직임 ===== */
+@keyframes popIn{0%{opacity:0;transform:translateY(24px) scale(.96) rotate(-1.5deg)}60%{opacity:1;transform:translateY(-4px) scale(1.01) rotate(.4deg)}100%{opacity:1;transform:none}}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-10px) rotate(2deg)}}
+@keyframes blob{0%,100%{border-radius:46% 54% 50% 50%/44% 48% 52% 56%}33%{border-radius:54% 46% 44% 56%/52% 42% 58% 48%}66%{border-radius:48% 52% 58% 42%/46% 56% 44% 54%}}
+@keyframes drift{0%{transform:translateY(0) rotate(0)}50%{transform:translateY(-14px) rotate(12deg)}100%{transform:translateY(0) rotate(0)}}
+@keyframes wiggle{0%,100%{transform:rotate(0)}25%{transform:rotate(-2deg)}75%{transform:rotate(2deg)}}
+@keyframes conf{0%{opacity:1;transform:translate(0,0) rotate(0)}100%{opacity:0;transform:translate(var(--x),var(--y)) rotate(var(--r))}}
+.hero .wrap > div:first-child > *{opacity:0;animation:popIn .7s cubic-bezier(.3,1.3,.5,1) forwards}
+.hero .wrap > div:first-child > *:nth-child(1){animation-delay:.05s}
+.hero .wrap > div:first-child > *:nth-child(2){animation-delay:.15s}
+.hero .wrap > div:first-child > *:nth-child(3){animation-delay:.3s}
+.hero .wrap > div:first-child > *:nth-child(4){animation-delay:.42s}
+.hero .wrap > div:first-child > *:nth-child(5){animation-delay:.54s}
+.hero .wrap > div:first-child > *:nth-child(6){animation-delay:.66s}
+.stage{opacity:0;animation:popIn .9s .25s cubic-bezier(.3,1.3,.5,1) forwards}
+.stage .photo{animation:blob 9s ease-in-out infinite}
+.mascot{animation:bob 3.6s ease-in-out infinite}
+.mascot.m2{animation-delay:-.9s;animation-duration:4.1s}.mascot.m3{animation-delay:-1.8s;animation-duration:3.3s}.mascot.m4{animation-delay:-2.6s;animation-duration:3.9s}
+.deco{position:absolute;pointer-events:none;font-family:var(--disp);color:var(--coral);animation:drift 6s ease-in-out infinite;opacity:.85}
+.deco.d1{left:46%;top:8%;font-size:28px}.deco.d2{left:4%;top:58%;font-size:22px;color:var(--leaf);animation-delay:-2s}.deco.d3{right:3%;top:52%;font-size:26px;color:#E9B23A;animation-delay:-4s}
+.tapnote{animation:wiggle 1.4s ease-in-out infinite}
+.confetti{position:absolute;left:50%;top:50%;width:9px;height:9px;border-radius:2px;pointer-events:none;animation:conf .9s ease-out forwards}
+/* 스크롤 등장 */
+.rv{opacity:0;transform:translateY(28px) rotate(-1deg);transition:opacity .6s ease, transform .7s cubic-bezier(.3,1.35,.5,1)}
+.rv.in{opacity:1;transform:none}
+/* 손에 반응하는 움직임 */
+.act{transition:background .2s, transform .25s cubic-bezier(.3,1.5,.5,1), box-shadow .25s}
+.act:hover{transform:translateY(-6px) rotate(-1deg);box-shadow:6px 8px 0 var(--cocoa)}
+.act:nth-child(2):hover{transform:translateY(22px) rotate(1deg)}
+.act img{transition:transform .4s cubic-bezier(.3,1.5,.5,1)}
+.act:hover img{transform:scale(1.04) rotate(1deg)}
+.slot{transition:border-color .15s, background .15s, transform .2s cubic-bezier(.3,1.8,.5,1)}
+.slot:active{transform:scale(.95)}
+.slot[aria-pressed="true"]{animation:wiggle .35s ease}
+.picked .sel.flash{animation:popIn .45s cubic-bezier(.3,1.4,.5,1)}
+.tcard{transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+.tcard:hover{transform:translateY(-8px) rotate(-2deg)}
+.tcard:nth-child(even):hover{transform:translateY(-8px) rotate(2deg)}
+.tcard img{transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
+.tcard:hover img{transform:scale(1.06)}
+.ticket .date b{display:inline-block;transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+.ticket:hover .date b{transform:rotate(-4deg) scale(1.05)}
+.port img{transition:transform .5s cubic-bezier(.3,1.5,.5,1)}
+.port img:hover{transform:rotate(1deg) scale(1.02)}
+.step{transition:background .2s}
+.step:hover{background:rgba(255,255,255,.35)}
+.btn.pulse{animation:wiggle 2.8s ease-in-out infinite}
+
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}.hero .wrap > div:first-child > *,.stage,.rv{opacity:1!important;transform:none!important}}
+</style>
+</head>
+<body>
+
+<header class="top" id="top">
+  <div class="wrap">
+    <a class="logo" href="#"><i aria-hidden="true"></i>플레이아츠 클럽</a>
+    <nav class="nav" aria-label="메뉴">
+      <a href="#club">클럽 소개</a>
+      <a href="#schedule">시간표</a>
+      <a href="#teacher">선생님</a>
+      <a href="#session">설명회</a>
+      <a href="#faq">자주 묻는 질문</a>
+    </nav>
+    <a class="btn" href="sms:01030921433">문자로 문의</a>
+  </div>
+</header>
+
+<main>
+<!-- 히어로 -->
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="hand">초등 4~6학년 부모님께</div>
+      <h1>우리 아이,<br>요즘 소리 내서<br>웃은 적 있나요?</h1>
+      <div class="flipline" aria-live="off">
+        <span>여기서는</span>
+        <span class="flip" id="flip" aria-hidden="true"><span class="on">마음껏 웃습니다</span><span>인물이 됩니다</span><span>북을 칩니다</span><span>친구와 떠듭니다</span><span>스트레스를 비웁니다</span></span>
+        <span class="sr-only" style="position:absolute;left:-9999px">여기서는 마음껏 웃고, 인물이 되고, 북을 치고, 친구와 떠들며 스트레스를 비웁니다.</span>
+      </div>
+      <p class="lead">학원은 머리를 채우고, 여기서는 스트레스를 비웁니다. 성북구 석관동에서 혜림쌤과 함께하는 초등 고학년 연극·음악 클럽입니다.</p>
+      <div class="ctas">
+        <a class="btn" href="#session">10월 13일 설명회 보기</a>
+        <a class="btn ghost" href="check/">우리 아이 유형 알아보기</a>
+      </div>
+      <p class="status"><b aria-hidden="true"></b>2026년 10월, 첫 기수 모집 중 (한 반 6~8명)</p>
+    </div>
+    <div class="stage">
+      <div class="photo"><img src="images/hero.jpg" alt="소파에 앉아 함께 크게 웃는 아이들 일러스트"></div>
+      <button class="mascot m1" type="button" data-say="오늘 뭐 해요?!" aria-label="분위기 메이커 캐릭터"><img src="images/type-maker.jpg" alt=""><span class="bubble"></span></button>
+      <button class="mascot m2" type="button" data-say="나 주인공 할래!" aria-label="무대 위 주인공 캐릭터"><img src="images/type-star.jpg" alt=""><span class="bubble"></span></button>
+      <button class="mascot m3" type="button" data-say="같이 하자~" aria-label="따뜻한 조력자 캐릭터"><img src="images/type-helper.jpg" alt=""><span class="bubble"></span></button>
+      <button class="mascot m4" type="button" data-say="…나도 해볼래" aria-label="조용한 관찰자 캐릭터"><img src="images/type-watcher.jpg" alt=""><span class="bubble"></span></button>
+      <span class="tapnote" aria-hidden="true">눌러보세요!</span>
+      <span class="deco d1" aria-hidden="true">♪</span><span class="deco d2" aria-hidden="true">★</span><span class="deco d3" aria-hidden="true">♫</span>
+    </div>
+  </div>
+</section>
+
+<!-- 활동 -->
+<section id="club">
+  <div class="wrap">
+    <div class="head">
+      <div class="hand">수업이 아니라 클럽</div>
+      <h2>잘하지 않아도 되는 곳에서,<br>마음껏 놉니다</h2>
+      <p>교육도 치료도 아닙니다. 연극과 음악으로 쌓인 걸 밖으로 꺼내는 시간입니다. 카드를 눌러 한 장면을 보세요.</p>
+    </div>
+    <div class="acts">
+      <button class="act" type="button" aria-expanded="false">
+        <img src="images/act-drama.jpg" alt="연극 가면을 든 손 일러스트">
+        <h3>인물이 되어 연극놀이</h3>
+        <span class="tog">한 장면 보기</span>
+        <span class="more">그림책 속 주인공이 되어 멈춘 장면을 만들고, 친구들이 인물에게 질문합니다. "그때 너는 어떤 마음이었어?" 내 이야기가 아니라서 오히려 편하게 말이 나옵니다.</span>
+      </button>
+      <button class="act" type="button" aria-expanded="false">
+        <img src="images/act-music.jpg" alt="북과 탬버린, 음표 일러스트">
+        <h3>북 치고 노래하며 발산</h3>
+        <span class="tog">한 장면 보기</span>
+        <span class="more">피아노, 전자드럼, 몸으로 치는 박자까지. 오늘 기분을 리듬으로 쳐보고, 음악에 맞춰 몸을 움직입니다. 소리 내는 것만으로도 표정이 달라집니다.</span>
+      </button>
+      <button class="act" type="button" aria-expanded="false">
+        <img src="images/act-talk.jpg" alt="마주 앉아 이야기하는 두 아이 일러스트">
+        <h3>친구와 마음껏 이야기</h3>
+        <span class="tog">한 장면 보기</span>
+        <span class="more">짝과 함께 하나의 장면을 만들고, 역할을 바꿔 서로의 입장이 되어 봅니다. 말하고, 들어주고, 맞춰가는 연습이 놀이 안에서 자연스럽게 일어납니다.</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- 한 시간 흐름 -->
+<section class="flow">
+  <div class="wrap">
+    <div class="head">
+      <div class="hand">한 번 모이면</div>
+      <h2>1시간 남짓, 이렇게 흘러갑니다</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="t">처음 10분</div><h3>몸 풀기</h3><p>클럽 인사로 시작해 몸과 목소리를 깨웁니다.</p></div>
+      <div class="step"><div class="t">그다음</div><h3>연극놀이</h3><p>그날의 이야기 속 인물이 되어 장면을 만듭니다.</p></div>
+      <div class="step"><div class="t">이어서</div><h3>음악과 리듬</h3><p>북, 피아노, 몸 박자로 마음껏 소리를 냅니다.</p></div>
+      <div class="step"><div class="t">마지막</div><h3>나누기</h3><p>오늘 어땠는지 한 마디씩. 그날 활동은 포트폴리오로 남깁니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 시간표 -->
+<section id="schedule">
+  <div class="wrap">
+    <div class="head">
+      <div class="hand">주 1회, 되는 시간에</div>
+      <h2>우리 아이 시간에 맞춰 골라 보세요</h2>
+      <p>반을 먼저 열어두고, 같은 시간이 되는 아이들끼리 모입니다. 3명 이상 모이면 개강합니다.</p>
+    </div>
+    <div class="sched">
+      <div class="days" id="days">
+        <div class="day"><h3>월요일</h3>
+          <button class="slot" type="button" aria-pressed="false" data-slot="월요일 오후 2시 30분"><b>오후 2:30</b>~ 4:00</button>
+          <button class="slot" type="button" aria-pressed="false" data-slot="월요일 오후 4시"><b>오후 4:00</b>~ 5:30</button>
+        </div>
+        <div class="day"><h3>수요일</h3>
+          <button class="slot" type="button" aria-pressed="false" data-slot="수요일 오후 3시 30분"><b>오후 3:30</b>~ 5:00</button>
+        </div>
+        <div class="day"><h3>목요일</h3>
+          <button class="slot" type="button" aria-pressed="false" data-slot="목요일 오후 2시 30분"><b>오후 2:30</b>~ 4:00</button>
+        </div>
+      </div>
+      <aside class="picked">
+        <h3>고른 시간</h3>
+        <p class="sel" id="sel">왼쪽에서 되는 시간을 눌러 보세요. 여러 개 골라도 됩니다.</p>
+        <a class="btn" id="smsBtn" href="sms:01030921433">이 시간으로 문자 문의</a>
+        <ul>
+          <li>회비 월 12만원 (주 1회)</li>
+          <li>매달 25일~말일 사전 등록 시 10만원</li>
+          <li>장소: 성북구 석관동</li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- 포트폴리오 -->
+<section>
+  <div class="wrap port">
+    <img src="images/portfolio.jpg" alt="그림과 사진이 붙은 아이 포트폴리오 일러스트">
+    <div>
+      <div class="hand">매달 받아가요</div>
+      <h2 style="font-size:clamp(30px,4vw,44px)">우리 아이 이야기,<br>한 달에 한 권</h2>
+      <p style="margin-top:14px;color:var(--cocoa2)">쓴 글, 활동지, 사진, 만든 것들을 모아 포트폴리오로 정리해 드립니다. 집에서 "오늘 뭐 했어?"에 "몰라" 대신 보여줄 게 생깁니다.</p>
+      <p class="note">매달 한 번, 학부모님들이 모여 아이들이 어떻게 활동했는지 함께 나누는 자리도 엽니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 유형 -->
+<section class="types">
+  <div class="wrap">
+    <div class="head">
+      <div class="hand">3분이면 알 수 있어요</div>
+      <h2>우리 아이는 어떤 유형일까?</h2>
+      <p>부모님 눈에 비친 우리 아이 모습으로 20문항에 답하면, 표현 성향과 더 자랄 수 있는 부분을 알려드립니다. 답변은 어디에도 저장되지 않습니다.</p>
+    </div>
+    <div class="tgrid">
+      <div class="tcard"><img src="images/type-maker.jpg" alt=""><h3>분위기 메이커형</h3><p>친구들 사이에서 반짝</p></div>
+      <div class="tcard"><img src="images/type-star.jpg" alt=""><h3>무대 위 주인공형</h3><p>혼자서도 당당하게</p></div>
+      <div class="tcard"><img src="images/type-helper.jpg" alt=""><h3>따뜻한 조력자형</h3><p>곁을 지키는 다정함</p></div>
+      <div class="tcard"><img src="images/type-watcher.jpg" alt=""><h3>조용한 관찰자형</h3><p>천천히, 깊이 보는 눈</p></div>
+    </div>
+    <a class="btn" href="check/">우리 아이 표현 지도 해보기</a>
+  </div>
+</section>
+
+<!-- 선생님 -->
+<section id="teacher">
+  <div class="wrap teacher">
+    <div class="portrait"><img src="images/teacher.jpg" alt="혜림쌤 사진"></div>
+    <div>
+      <div class="hand">함께하는 선생님</div>
+      <h2 style="font-size:clamp(30px,4vw,44px)">학교에서 아이들을<br>만나온 혜림쌤</h2>
+      <ul class="cv">
+        <li><span>현장</span><span>초등 늘봄학교·방과후 예술강사, 학교밖청소년지원센터(꿈드림) 보컬 강사</span></li>
+        <li><span>학교</span><span>인천대중예술고등학교 기간제 교사·산학겸임교사</span></li>
+        <li><span>수업</span><span>교육연극, 연극놀이, 밴드부, 난타, 보컬. 밴드 수업 아이들과 돌곶이 페스티벌 무대</span></li>
+        <li><span>공부</span><span>성결대학교 교육대학원 연극영화교육전공</span></li>
+        <li><span>자격</span><span>문화예술교육사 2급, 아동청소년심리상담사 1급<br>음악심리상담사 1급·청소년진로리더십강사 1급 과정 중</span></li>
+      </ul>
+      <p class="why">플레이아츠 클럽은 해외 유스시어터와 청소년 동아리 운영 방식을 참고해 만들었습니다. 호주의 한 청소년극단 조사에서는 참여 청소년 대다수가 자신감과 안녕감이 나아졌다고 답했습니다.<sup>1</sup> 우리 아이도 똑같이 된다고 약속하지는 않습니다. 다만 그런 시간이 될 수 있게 준비합니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 설명회 -->
+<section class="session" id="session">
+  <div class="wrap">
+    <div class="ticket">
+      <div class="date"><b>10.13</b><span>화요일 오후 1시</span></div>
+      <div class="info">
+        <div class="hand">먼저 와서 보세요</div>
+        <h3>플레이아츠 주니어클럽 학부모 설명회</h3>
+        <p>클럽이 어떻게 운영되는지, 왜 이 시기 아이들에게 이런 시간이 필요한지 편하게 들려드립니다. 참가는 무료이고, 장소는 신청하신 분께 문자로 안내합니다.</p>
+        <div class="row">
+          <a class="btn pulse" href="sms:01030921433?body=%EC%84%A4%EB%AA%85%ED%9A%8C%20%EC%8B%A0%EC%B2%AD%ED%95%A9%EB%8B%88%EB%8B%A4.%20%EC%9D%B4%EB%A6%84%3A%20%2F%20%EC%95%84%EC%9D%B4%20%ED%95%99%EB%85%84%3A%20">문자로 설명회 신청</a>
+          <a class="btn ghost" href="tel:01030921433">전화하기</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 자주 묻는 질문 -->
+<section id="faq">
+  <div class="wrap">
+    <div class="head"><h2>자주 묻는 질문</h2></div>
+    <div class="faq">
+      <details><summary>치료나 상담 프로그램인가요?</summary><p>아닙니다. 연극과 음악으로 마음껏 표현하고 노는 클럽입니다. 아이를 진단하거나 치료하지 않습니다. 걱정되는 부분이 있다면 전문 기관 상담을 권해드립니다.</p></details>
+      <details><summary>회비는 얼마인가요?</summary><p>월 12만원(주 1회)입니다. 매달 25일부터 말일 사이에 다음 달을 미리 등록하시면 10만원입니다.</p></details>
+      <details><summary>결석하면 어떻게 되나요?</summary><p>당일 결석은 차감되고 보강은 어렵습니다. 하루 전에 연락 주시면 같은 주 다른 시간으로 옮길 수 있습니다. 병결은 1회까지 차감하지 않습니다.</p></details>
+      <details><summary>중간에 그만두면 환불되나요?</summary><p>남은 회차만큼 회당 25,000원으로 환불해 드립니다. 해당 월 포트폴리오는 제공되지 않습니다.</p></details>
+      <details><summary>연기나 노래를 못해도 괜찮나요?</summary><p>그럼요. 잘하는 걸 보여주는 곳이 아니라 마음껏 해보는 곳입니다. 처음엔 지켜보기만 해도 괜찮습니다.</p></details>
+      <details><summary>공연도 하나요?</summary><p>아이들이 모이면 돌곶이 페스티벌에서 함께 만든 뮤지컬 장면을 무대에 올릴 계획입니다.</p></details>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <strong style="font-family:var(--disp);font-size:20px;color:var(--cocoa);font-weight:400">플레이아츠 주니어클럽</strong>
+      <small>운영 혜림쌤, 성북구 석관동<br>신청·문의 010-3092-1433</small>
+      <p class="fn">1. Australian Theatre for Young People(ATYP) 참여자 조사. 연구에서 보고된 결과이며 개인별 효과를 보장하지 않습니다.<br>사이트의 그림은 이해를 돕기 위한 일러스트입니다.</p>
+    </div>
+    <a href="#top" style="font-family:var(--hand);font-size:20px;color:var(--coralInk)">맨 위로</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // 상단 줄
+  var top = document.getElementById('top');
+  window.addEventListener('scroll', function(){ top.classList.toggle('scrolled', window.scrollY > 8); }, {passive:true});
+
+  // 바뀌는 문구
+  var words = document.querySelectorAll('#flip span'); var i = 0;
+  if (!reduce && words.length) {
+    setInterval(function(){
+      var cur = words[i]; i = (i + 1) % words.length; var nxt = words[i];
+      cur.classList.remove('on'); cur.classList.add('out');
+      nxt.classList.remove('out'); nxt.classList.add('on');
+      setTimeout(function(){ cur.classList.remove('out'); }, 460);
+    }, 2200);
+  }
+
+  // 캐릭터 누르기
+  document.querySelectorAll('.mascot').forEach(function(m){
+    m.addEventListener('click', function(){
+      var b = m.querySelector('.bubble'); b.textContent = m.dataset.say;
+      m.classList.remove('boing'); void m.offsetWidth; m.classList.add('boing');
+      b.classList.add('show'); clearTimeout(m._t);
+      m._t = setTimeout(function(){ b.classList.remove('show'); }, 1600);
+      var note = document.querySelector('.tapnote'); if (note) note.remove();
+    });
+  });
+
+  // 활동 카드
+  document.querySelectorAll('.act').forEach(function(a){
+    a.addEventListener('click', function(){
+      var open = a.getAttribute('aria-expanded') === 'true';
+      a.setAttribute('aria-expanded', open ? 'false' : 'true');
+      a.querySelector('.tog').textContent = open ? '한 장면 보기' : '접기';
+    });
+  });
+
+  // 시간표 고르기
+  var picked = [];
+  var sel = document.getElementById('sel'), sms = document.getElementById('smsBtn');
+  document.querySelectorAll('.slot').forEach(function(s){
+    s.addEventListener('click', function(){
+      var on = s.getAttribute('aria-pressed') !== 'true';
+      s.setAttribute('aria-pressed', on ? 'true' : 'false');
+      var v = s.dataset.slot;
+      picked = on ? picked.concat(v) : picked.filter(function(x){ return x !== v; });
+      if (picked.length) {
+        sel.textContent = picked.join(', ');
+        var body = '플레이아츠 클럽 문의드립니다. 가능한 시간: ' + picked.join(', ') + ' / 아이 학년: ';
+        sms.href = 'sms:01030921433?body=' + encodeURIComponent(body);
+      } else {
+        sel.textContent = '왼쪽에서 되는 시간을 눌러 보세요. 여러 개 골라도 됩니다.';
+        sms.href = 'sms:01030921433';
+      }
+    });
+  });
+
+  // 스크롤 등장
+  var rvTargets = document.querySelectorAll('section:not(.hero) .head, .act, .step, .day, .picked, .port > *, .tcard, .teacher > *, .ticket, .faq details');
+  if (!reduce && 'IntersectionObserver' in window) {
+    var groupCount = new Map();
+    rvTargets.forEach(function(el){
+      el.classList.add('rv');
+      var p = el.parentElement; var n = groupCount.get(p) || 0; groupCount.set(p, n + 1);
+      el.style.transitionDelay = (n * 0.09) + 's';
+    });
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) { var t = e.target; t.classList.add('in'); io.unobserve(t); var d = parseFloat(t.style.transitionDelay) || 0; setTimeout(function(){ t.classList.remove('rv','in'); t.style.transitionDelay = ''; }, 900 + d * 1000); } });
+    }, {threshold: 0.15, rootMargin: '0px 0px -40px 0px'});
+    rvTargets.forEach(function(el){ io.observe(el); });
+  }
+  // 캐릭터 누르면 꽃가루
+  var colors = ['#E8553E','#FFE59A','#8BBF7A','#FFB49A','#9EC5F0'];
+  document.querySelectorAll('.mascot').forEach(function(m){
+    m.addEventListener('click', function(){
+      if (reduce) return;
+      for (var k = 0; k < 12; k++) {
+        var c = document.createElement('i'); c.className = 'confetti';
+        var ang = Math.random() * Math.PI * 2, dist = 50 + Math.random() * 60;
+        c.style.setProperty('--x', Math.cos(ang) * dist + 'px');
+        c.style.setProperty('--y', Math.sin(ang) * dist - 30 + 'px');
+        c.style.setProperty('--r', (Math.random() * 540 - 270) + 'deg');
+        c.style.background = colors[k % colors.length];
+        m.appendChild(c); setTimeout(function(x){ return function(){ x.remove(); }; }(c), 950);
+      }
+    });
+  });
+  // 고른 시간 표시 반짝
+  document.querySelectorAll('.slot').forEach(function(s){
+    s.addEventListener('click', function(){ var el = document.getElementById('sel'); el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash'); });
+  });
+})();
+</script>
+</body>
+</html>
