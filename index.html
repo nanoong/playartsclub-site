@@ -57,6 +57,7 @@ section{padding:96px 0}
 .flip span{position:absolute;left:0;top:0;white-space:nowrap;color:var(--coralInk);transform:translateY(110%);transition:transform .45s cubic-bezier(.3,1.4,.5,1)}
 .flip span.on{transform:translateY(0)}
 .flip span.out{transform:translateY(-110%)}
+.flip span.reset{transition:none}
 .hero .lead{margin-top:20px;max-width:30em;color:var(--cocoa2)}
 .hero .ctas{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
 .status{margin-top:22px;font-size:14px;color:var(--cocoa2);display:flex;align-items:center;gap:8px}
@@ -64,9 +65,10 @@ section{padding:96px 0}
 .stage{position:relative;aspect-ratio:1/1}
 .stage .photo{position:absolute;inset:6% 4% 8% 8%;border-radius:46% 54% 50% 50%/44% 48% 52% 56%;overflow:hidden;border:3px solid var(--cocoa);background:var(--peach)}
 .stage .photo img{width:100%;height:100%;object-fit:cover}
-.mascot{position:absolute;width:24%;aspect-ratio:1/1;border-radius:50%;overflow:visible;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.mascot{position:absolute;left:0;top:0;width:24%;aspect-ratio:1/1;border-radius:50%;overflow:visible;cursor:grab;-webkit-tap-highlight-color:transparent;touch-action:none;will-change:transform;z-index:2;padding:0}
+.mascot.grab{cursor:grabbing;z-index:3}
+.mascot img{pointer-events:none;-webkit-user-drag:none;user-select:none}
 .mascot img{width:100%;height:100%;object-fit:cover;border-radius:50%;border:3px solid var(--cocoa);background:#fff}
-.mascot.m1{left:-2%;top:2%}.mascot.m2{right:-2%;top:12%}.mascot.m3{left:2%;bottom:0}.mascot.m4{right:4%;bottom:-2%}
 .mascot.boing img{animation:boing .55s cubic-bezier(.3,1.6,.5,1)}
 @keyframes boing{0%{transform:scale(1)}30%{transform:scale(1.18,.86)}60%{transform:scale(.92,1.1)}100%{transform:scale(1)}}
 .bubble{position:absolute;left:50%;bottom:104%;transform:translateX(-50%) scale(.6);opacity:0;background:#fff;border:2.5px solid var(--cocoa);border-radius:16px;padding:6px 12px;font-family:var(--hand);font-size:19px;white-space:nowrap;pointer-events:none;transition:opacity .18s,transform .25s cubic-bezier(.3,1.6,.5,1)}
@@ -188,8 +190,6 @@ footer small{display:block;margin-top:6px}
 .hero .wrap > div:first-child > *:nth-child(6){animation-delay:.66s}
 .stage{opacity:0;animation:popIn .9s .25s cubic-bezier(.3,1.3,.5,1) forwards}
 .stage .photo{animation:blob 9s ease-in-out infinite}
-.mascot{animation:bob 3.6s ease-in-out infinite}
-.mascot.m2{animation-delay:-.9s;animation-duration:4.1s}.mascot.m3{animation-delay:-1.8s;animation-duration:3.3s}.mascot.m4{animation-delay:-2.6s;animation-duration:3.9s}
 .deco{position:absolute;pointer-events:none;font-family:var(--disp);color:var(--coral);animation:drift 6s ease-in-out infinite;opacity:.85}
 .deco.d1{left:46%;top:8%;font-size:28px}.deco.d2{left:4%;top:58%;font-size:22px;color:var(--leaf);animation-delay:-2s}.deco.d3{right:3%;top:52%;font-size:26px;color:#E9B23A;animation-delay:-4s}
 .tapnote{animation:wiggle 1.4s ease-in-out infinite}
@@ -220,6 +220,8 @@ footer small{display:block;margin-top:6px}
 .step:hover{background:rgba(255,255,255,.35)}
 .btn.pulse{animation:wiggle 2.8s ease-in-out infinite}
 
+.trail{position:fixed;left:0;top:0;pointer-events:none;z-index:50;font-family:var(--disp);font-size:20px;animation:trail 1s ease-out forwards}
+@keyframes trail{0%{opacity:1;transform:translate(var(--sx),var(--sy)) scale(.6) rotate(0)}100%{opacity:0;transform:translate(calc(var(--sx) + var(--dx)),calc(var(--sy) - 46px)) scale(1.1) rotate(var(--rt))}}
 @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}.hero .wrap > div:first-child > *,.stage,.rv{opacity:1!important;transform:none!important}}
 </style>
 </head>
@@ -264,7 +266,7 @@ footer small{display:block;margin-top:6px}
       <button class="mascot m2" type="button" data-say="나 주인공 할래!" aria-label="무대 위 주인공 캐릭터"><img src="images/type-star.jpg" alt=""><span class="bubble"></span></button>
       <button class="mascot m3" type="button" data-say="같이 하자~" aria-label="따뜻한 조력자 캐릭터"><img src="images/type-helper.jpg" alt=""><span class="bubble"></span></button>
       <button class="mascot m4" type="button" data-say="…나도 해볼래" aria-label="조용한 관찰자 캐릭터"><img src="images/type-watcher.jpg" alt=""><span class="bubble"></span></button>
-      <span class="tapnote" aria-hidden="true">눌러보세요!</span>
+      <span class="tapnote" aria-hidden="true">잡아서 던져보세요!</span>
       <span class="deco d1" aria-hidden="true">♪</span><span class="deco d2" aria-hidden="true">★</span><span class="deco d3" aria-hidden="true">♫</span>
     </div>
   </div>
@@ -343,8 +345,7 @@ footer small{display:block;margin-top:6px}
         <p class="sel" id="sel">왼쪽에서 되는 시간을 눌러 보세요. 여러 개 골라도 됩니다.</p>
         <a class="btn" id="smsBtn" href="sms:01030921433">이 시간으로 문자 문의</a>
         <ul>
-          <li>회비 월 12만원 (주 1회)</li>
-          <li>매달 25일~말일 사전 등록 시 10만원</li>
+          <li>회비 월 10만원 (주 1회)</li>
           <li>장소: 성북구 석관동</li>
         </ul>
       </aside>
@@ -426,7 +427,7 @@ footer small{display:block;margin-top:6px}
     <div class="head"><h2>자주 묻는 질문</h2></div>
     <div class="faq">
       <details><summary>치료나 상담 프로그램인가요?</summary><p>아닙니다. 연극과 음악으로 마음껏 표현하고 노는 클럽입니다. 아이를 진단하거나 치료하지 않습니다. 걱정되는 부분이 있다면 전문 기관 상담을 권해드립니다.</p></details>
-      <details><summary>회비는 얼마인가요?</summary><p>월 12만원(주 1회)입니다. 매달 25일부터 말일 사이에 다음 달을 미리 등록하시면 10만원입니다.</p></details>
+      <details><summary>회비는 얼마인가요?</summary><p>월 10만원(주 1회)입니다.</p></details>
       <details><summary>결석하면 어떻게 되나요?</summary><p>당일 결석은 차감되고 보강은 어렵습니다. 하루 전에 연락 주시면 같은 주 다른 시간으로 옮길 수 있습니다. 병결은 1회까지 차감하지 않습니다.</p></details>
       <details><summary>중간에 그만두면 환불되나요?</summary><p>남은 회차만큼 회당 25,000원으로 환불해 드립니다. 해당 월 포트폴리오는 제공되지 않습니다.</p></details>
       <details><summary>연기나 노래를 못해도 괜찮나요?</summary><p>그럼요. 잘하는 걸 보여주는 곳이 아니라 마음껏 해보는 곳입니다. 처음엔 지켜보기만 해도 괜찮습니다.</p></details>
@@ -461,13 +462,14 @@ footer small{display:block;margin-top:6px}
       var cur = words[i]; i = (i + 1) % words.length; var nxt = words[i];
       cur.classList.remove('on'); cur.classList.add('out');
       nxt.classList.remove('out'); nxt.classList.add('on');
-      setTimeout(function(){ cur.classList.remove('out'); }, 460);
+      setTimeout(function(){ cur.classList.add('reset'); cur.classList.remove('out'); void cur.offsetWidth; cur.classList.remove('reset'); }, 480);
     }, 2200);
   }
 
   // 캐릭터 누르기
   document.querySelectorAll('.mascot').forEach(function(m){
     m.addEventListener('click', function(){
+      if (m._dragged) return;
       var b = m.querySelector('.bubble'); b.textContent = m.dataset.say;
       m.classList.remove('boing'); void m.offsetWidth; m.classList.add('boing');
       b.classList.add('show'); clearTimeout(m._t);
@@ -523,7 +525,7 @@ footer small{display:block;margin-top:6px}
   var colors = ['#E8553E','#FFE59A','#8BBF7A','#FFB49A','#9EC5F0'];
   document.querySelectorAll('.mascot').forEach(function(m){
     m.addEventListener('click', function(){
-      if (reduce) return;
+      if (reduce || m._dragged) return;
       for (var k = 0; k < 12; k++) {
         var c = document.createElement('i'); c.className = 'confetti';
         var ang = Math.random() * Math.PI * 2, dist = 50 + Math.random() * 60;
@@ -539,6 +541,92 @@ footer small{display:block;margin-top:6px}
   document.querySelectorAll('.slot').forEach(function(s){
     s.addEventListener('click', function(){ var el = document.getElementById('sel'); el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash'); });
   });
+
+  // ===== 캐릭터 놀이터 =====
+  (function(){
+    var stage = document.querySelector('.stage'); if (!stage) return;
+    var ms = Array.prototype.slice.call(stage.querySelectorAll('.mascot'));
+    var homes = [[.10,.12],[.88,.20],[.12,.86],[.86,.90]];
+    var S = 0, R = 0, bodies = [];
+    function size(){ S = stage.clientWidth; R = S * 0.12; }
+    size();
+    ms.forEach(function(m, i){
+      bodies.push({el:m, x:homes[i][0]*S, y:homes[i][1]*S, vx:0, vy:0, hx:homes[i][0], hy:homes[i][1], drag:false, ph:i*1.7, lean:0});
+    });
+    window.addEventListener('resize', function(){ var old = S; size(); bodies.forEach(function(b){ b.x *= S/old; b.y *= S/old; }); });
+    var mx = null, my = null;
+    window.addEventListener('pointermove', function(e){ var r = stage.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top; }, {passive:true});
+    bodies.forEach(function(b){
+      var el = b.el, lastX, lastY, lastT, sx, sy;
+      el.addEventListener('pointerdown', function(e){
+        el.setPointerCapture(e.pointerId); b.drag = true; el._dragged = false; el.classList.add('grab');
+        var r = stage.getBoundingClientRect(); sx = lastX = e.clientX; sy = lastY = e.clientY; lastT = performance.now();
+        b.ox = e.clientX - r.left - b.x; b.oy = e.clientY - r.top - b.y; b.vx = b.vy = 0;
+        var n = document.querySelector('.tapnote'); if (n) n.style.opacity = '0';
+      });
+      el.addEventListener('pointermove', function(e){
+        if (!b.drag) return;
+        var r = stage.getBoundingClientRect(), t = performance.now(), dt = Math.max(8, t - lastT);
+        if (Math.abs(e.clientX - sx) + Math.abs(e.clientY - sy) > 6) el._dragged = true;
+        b.vx = (e.clientX - lastX) / dt * 16; b.vy = (e.clientY - lastY) / dt * 16;
+        b.x = e.clientX - r.left - b.ox; b.y = e.clientY - r.top - b.oy;
+        lastX = e.clientX; lastY = e.clientY; lastT = t;
+      });
+      function up(){ if (!b.drag) return; b.drag = false; el.classList.remove('grab'); setTimeout(function(){ el._dragged = false; }, 50); }
+      el.addEventListener('pointerup', up); el.addEventListener('pointercancel', up);
+    });
+    var t0 = performance.now();
+    function step(now){
+      var t = (now - t0) / 1000, pad = -S * 0.04;
+      bodies.forEach(function(b){
+        if (b.drag) return;
+        var hx = b.hx * S, hy = b.hy * S + (reduce ? 0 : Math.sin(t * 1.6 + b.ph) * S * 0.015);
+        b.vx += (hx - b.x) * 0.012; b.vy += (hy - b.y) * 0.012;
+        b.vx *= 0.965; b.vy *= 0.965;
+        b.x += b.vx; b.y += b.vy;
+        if (b.x < R + pad) { b.x = R + pad; b.vx = Math.abs(b.vx) * 0.8; boing(b); }
+        if (b.x > S - R - pad) { b.x = S - R - pad; b.vx = -Math.abs(b.vx) * 0.8; boing(b); }
+        if (b.y < R + pad) { b.y = R + pad; b.vy = Math.abs(b.vy) * 0.8; boing(b); }
+        if (b.y > S - R - pad) { b.y = S - R - pad; b.vy = -Math.abs(b.vy) * 0.8; boing(b); }
+      });
+      for (var i = 0; i < bodies.length; i++) for (var j = i + 1; j < bodies.length; j++) {
+        var a = bodies[i], c = bodies[j], dx = c.x - a.x, dy = c.y - a.y, d = Math.hypot(dx, dy) || 1, min = R * 2;
+        if (d < min) {
+          var nx = dx / d, ny = dy / d, ov = (min - d) / 2;
+          if (!a.drag) { a.x -= nx * ov; a.y -= ny * ov; } if (!c.drag) { c.x += nx * ov; c.y += ny * ov; }
+          var rv = (c.vx - a.vx) * nx + (c.vy - a.vy) * ny;
+          if (rv < 0) { var imp = -rv * 0.9; if (!a.drag) { a.vx -= imp * nx; a.vy -= imp * ny; } if (!c.drag) { c.vx += imp * nx; c.vy += imp * ny; } if (imp > 2) { boing(a); boing(c); } }
+        }
+      }
+      bodies.forEach(function(b){
+        var target = 0;
+        if (mx !== null && !b.drag) { target = Math.max(-14, Math.min(14, (mx - b.x) * 0.05)); }
+        if (b.drag) target = Math.max(-25, Math.min(25, b.vx * 1.5));
+        b.lean += (target - b.lean) * 0.12;
+        b.el.style.transform = 'translate(' + (b.x - R) + 'px,' + (b.y - R) + 'px) rotate(' + b.lean.toFixed(1) + 'deg)';
+      });
+      requestAnimationFrame(step);
+    }
+    function boing(b){ if (b._bt && performance.now() - b._bt < 300) return; b._bt = performance.now(); b.el.classList.remove('boing'); void b.el.offsetWidth; b.el.classList.add('boing'); }
+    requestAnimationFrame(step);
+  })();
+
+  // ===== 커서 따라 음표 =====
+  (function(){
+    if (reduce) return;
+    var marks = ['♪','♫','★','♪','●'], cols = ['#E8553E','#E9B23A','#8BBF7A','#F49A7E','#9EC5F0'];
+    var lx = -99, ly = -99, k = 0;
+    window.addEventListener('pointermove', function(e){
+      if (Math.hypot(e.clientX - lx, e.clientY - ly) < 34) return;
+      lx = e.clientX; ly = e.clientY;
+      var n = document.createElement('span'); n.className = 'trail'; n.setAttribute('aria-hidden','true');
+      n.textContent = marks[k % marks.length]; n.style.color = cols[k % cols.length]; k++;
+      n.style.setProperty('--sx', (e.clientX - 8) + 'px'); n.style.setProperty('--sy', (e.clientY - 12) + 'px');
+      n.style.setProperty('--dx', (Math.random() * 30 - 15) + 'px'); n.style.setProperty('--rt', (Math.random() * 60 - 30) + 'deg');
+      n.style.fontSize = (14 + Math.random() * 12) + 'px';
+      document.body.appendChild(n); setTimeout(function(){ n.remove(); }, 1000);
+    }, {passive:true});
+  })();
 })();
 </script>
 </body>
