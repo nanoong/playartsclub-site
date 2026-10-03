@@ -174,6 +174,74 @@ footer small{display:block;margin-top:6px}
 .fn{margin-top:14px;font-size:13px;line-height:1.6;max-width:560px}
 
 
+/* ===== 동네 산책 ===== */
+body.town-on{overflow:hidden}
+.town{position:fixed;inset:0;z-index:100;background:#BFE0EA;overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none;font-family:var(--body);color:var(--cocoa)}
+.town[hidden]{display:none}
+.town .sky{position:absolute;inset:0 0 var(--gh) 0;background:url(images/town/sky.webp) repeat-x;background-size:auto 100%;}
+.town{--gh:30vh}
+.town .world{position:absolute;left:0;top:0;bottom:0;will-change:transform}
+.town .ground{position:absolute;left:0;right:0;bottom:0;height:var(--gh)}
+.town .walk{position:absolute;left:0;right:0;top:0;height:42%;background:#F6D9C6;border-top:4px solid var(--cocoa);background-image:repeating-linear-gradient(90deg,transparent 0 118px,rgba(61,43,34,.14) 118px 121px)}
+.town .curb{position:absolute;left:0;right:0;top:42%;height:7%;background:#E8BCA3;border-top:3px solid rgba(61,43,34,.55)}
+.town .road{position:absolute;left:0;right:0;top:49%;bottom:0;background:#9C8A80}
+.town .road::after{content:"";position:absolute;left:0;right:0;top:46%;height:6px;background:repeating-linear-gradient(90deg,#FFF6EE 0 60px,transparent 60px 120px)}
+.town .bld{position:absolute;bottom:calc(var(--gh) * .58 + 2px);height:min(44vh,68vw,380px);transform-origin:50% 100%;transition:transform .35s cubic-bezier(.3,1.6,.5,1);cursor:pointer}
+.town .bld img{height:100%;width:auto;display:block;pointer-events:none;-webkit-user-drag:none}
+.town .bld.near{transform:scale(1.06)}
+.town .npc{position:absolute;bottom:calc(var(--gh) * .58 - 6px);height:min(13vh,104px);cursor:pointer}
+.town .npc img{height:100%;width:auto;pointer-events:none;animation:bob 2.8s ease-in-out infinite}
+.town .say{position:absolute;left:50%;bottom:104%;transform:translateX(-50%) scale(.6);opacity:0;background:#fff;border:2.5px solid var(--cocoa);border-radius:16px;padding:6px 12px;font-family:var(--hand);font-size:clamp(16px,2.2vh,20px);white-space:nowrap;transition:opacity .2s,transform .3s cubic-bezier(.3,1.6,.5,1);pointer-events:none}
+.town .show>.say,.town .say.show{opacity:1;transform:translateX(-50%) scale(1)}
+.town .tip{position:absolute;bottom:calc(var(--gh) * .58 + min(44vh,68vw,380px) + 14px);transform:translateX(-50%) translateY(10px);opacity:0;background:var(--coral);color:#fff;border:2.5px solid var(--cocoa);box-shadow:3px 3px 0 var(--cocoa);border-radius:14px;padding:8px 14px;font-family:var(--disp);font-size:clamp(15px,2.2vh,19px);white-space:nowrap;transition:opacity .2s, transform .3s cubic-bezier(.3,1.6,.5,1);pointer-events:none}
+.town .tip.show{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto;cursor:pointer;animation:wiggle 1.6s ease-in-out infinite}
+.town .sign{position:absolute;bottom:calc(var(--gh) * .58);width:min(250px,60vw);text-align:center}
+.town .sign .board{background:#C98B5E;border:3px solid var(--cocoa);border-radius:14px;padding:12px 14px;color:#FFF6EE;font-family:var(--disp);font-size:clamp(17px,2.4vh,21px);line-height:1.35;box-shadow:inset 0 -6px 0 rgba(0,0,0,.12)}
+.town .sign .board small{display:block;font-family:var(--hand);font-size:clamp(16px,2.2vh,20px);color:#FFE9C9;margin-top:4px}
+.town .sign .pole{width:12px;height:min(10vh,70px);background:#A86E47;border:3px solid var(--cocoa);border-top:0;margin:0 auto}
+.town .tree{position:absolute;bottom:calc(var(--gh) * .58);width:min(13vh,96px)}
+.town .tree i{display:block;width:100%;aspect-ratio:1/1;border-radius:50%;background:#A8CF94;border:3px solid var(--cocoa);box-shadow:inset -10px -8px 0 rgba(0,0,0,.08)}
+.town .tree b{display:block;width:16%;height:min(7vh,50px);background:#B07A55;border:3px solid var(--cocoa);border-top:0;margin:-4px auto 0}
+.town .lamp{position:absolute;bottom:calc(var(--gh) * .58);width:12px;height:min(22vh,170px);background:#6E5446;border-radius:6px}
+.town .lamp::before{content:"";position:absolute;left:50%;top:-18px;transform:translateX(-50%);width:30px;height:24px;border-radius:12px 12px 6px 6px;background:#FFE59A;border:3px solid var(--cocoa);box-shadow:0 0 24px 8px rgba(255,229,154,.6)}
+.town .player{position:absolute;bottom:calc(var(--gh) * .58 - 10px);height:min(16vh,132px);aspect-ratio:300/286;z-index:5;pointer-events:none}
+.town .player .body{height:100%;transform-origin:50% 100%}
+.town .player img{height:100%;width:auto;display:block}
+.town .player.walking .body{animation:step .36s ease-in-out infinite}
+@keyframes step{0%,100%{transform:translateY(0) scale(1,1)}50%{transform:translateY(-9%) scale(.96,1.05)}}
+.town .player .shadow{position:absolute;left:18%;right:18%;bottom:-6px;height:12px;border-radius:50%;background:rgba(61,43,34,.22);z-index:-1}
+.town .hud{position:absolute;left:0;right:0;top:0;padding:calc(14px + env(safe-area-inset-top,0px)) 18px 0;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;z-index:10;pointer-events:none}
+.town .hud > *{pointer-events:auto}
+.town .brand{display:flex;flex-direction:column;gap:2px;background:rgba(255,248,242,.92);border:2.5px solid var(--cocoa);border-radius:16px;padding:8px 14px}
+.town .brand b{font-family:var(--disp);font-weight:400;font-size:18px}
+.town .brand span{font-size:13px;color:var(--cocoa2)}
+.town .skip{min-height:44px;font-size:16px;padding:0 16px}
+.town .map{position:absolute;left:50%;top:calc(16px + env(safe-area-inset-top,0px));transform:translateX(-50%);display:flex;gap:6px;background:rgba(255,248,242,.92);border:2.5px solid var(--cocoa);border-radius:16px;padding:6px 8px;z-index:10}
+.town .map button{font-family:var(--disp);font-size:14px;padding:4px 8px;border-radius:10px;color:var(--cocoa2);white-space:nowrap}
+.town .map button.on{background:var(--butter);color:var(--cocoa)}
+@media (max-width:760px){.town .map{top:calc(72px + env(safe-area-inset-top,0px));max-width:calc(100vw - 24px);overflow-x:auto}.town .map button{font-size:13px;padding:4px 6px}.town .brand span{display:none}}
+.town .pads{position:absolute;left:0;right:0;bottom:calc(var(--gh) * .2);display:flex;justify-content:space-between;padding:0 16px;z-index:10;pointer-events:none}
+.town .pad{pointer-events:auto;width:64px;height:64px;border-radius:50%;background:rgba(255,248,242,.94);border:3px solid var(--cocoa);box-shadow:3px 3px 0 var(--cocoa);font-family:var(--disp);font-size:26px;display:flex;align-items:center;justify-content:center;touch-action:none}
+.town .pad:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--cocoa)}
+.town .enter{position:absolute;left:50%;bottom:calc(var(--gh) * .2 + 6px);transform:translateX(-50%);z-index:10}
+.town .enter[hidden]{display:none}
+.town .hint{position:absolute;left:50%;top:40%;width:min(340px,calc(100vw - 40px));transform:translate(-50%,-50%);background:rgba(61,43,34,.86);color:#FFF6EE;border-radius:18px;padding:14px 20px;text-align:center;font-size:16px;line-height:1.6;z-index:9;transition:opacity .5s;pointer-events:none}
+.town .hint b{font-family:var(--disp);font-weight:400;font-size:20px;display:block}
+.town .hint.gone{opacity:0}
+.tpanel{position:absolute;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translate(-50%,120%);width:min(560px,calc(100vw - 24px));max-height:72vh;overflow:auto;background:var(--paper);border:3px solid var(--cocoa);border-radius:26px;box-shadow:6px 6px 0 var(--cocoa);padding:22px 22px 20px;z-index:20;transition:transform .45s cubic-bezier(.3,1.35,.5,1)}
+.tpanel.open{transform:translate(-50%,0)}
+.tpanel .x{position:absolute;right:12px;top:10px;font-size:26px;font-family:var(--disp);width:40px;height:40px}
+.tpanel h3{font-size:26px;margin:2px 0 8px}
+.tpanel p{color:var(--cocoa2);font-size:16px}
+.tpanel ul{margin:10px 0 0;padding-left:20px;color:var(--cocoa2);font-size:16px}
+.tpanel .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.tpanel .btn{min-height:46px;font-size:17px}
+.tpanel .mini{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px}
+.tpanel .mini span{background:#fff;border:2px solid var(--line);border-radius:12px;padding:8px 10px;font-size:15px}
+.tpanel .mini b{font-family:var(--disp);font-weight:400;display:block;font-size:18px;color:var(--cocoa)}
+.tpanel .tp{display:flex;gap:14px;align-items:center;margin-top:8px}
+.tpanel .tp img{width:84px;height:84px;border-radius:50%;object-fit:cover;object-position:center top;border:3px solid var(--cocoa)}
+
 /* ===== 움직임 ===== */
 @keyframes popIn{0%{opacity:0;transform:translateY(24px) scale(.96) rotate(-1.5deg)}60%{opacity:1;transform:translateY(-4px) scale(1.01) rotate(.4deg)}100%{opacity:1;transform:none}}
 @keyframes bob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-10px) rotate(2deg)}}
@@ -227,6 +295,23 @@ footer small{display:block;margin-top:6px}
 </head>
 <body>
 
+
+<div class="town" id="town" role="dialog" aria-modal="true" aria-label="플레이아츠 동네 산책" hidden>
+  <div class="sky" id="tSky"></div>
+  <div class="world" id="tWorld">
+    <div class="ground"><div class="walk"></div><div class="curb"></div><div class="road"></div></div>
+  </div>
+  <div class="hud">
+    <div class="brand"><b>플레이아츠 동네</b><span>석관동 골목을 걸어 보세요</span></div>
+    <button class="btn ghost skip" id="tSkip" type="button">그냥 볼래요</button>
+  </div>
+  <div class="map" id="tMap" aria-label="장소 바로 가기"></div>
+  <div class="hint" id="tHint"><b>동글이를 움직여 보세요</b>← → 방향키, 아래 버튼, 스크롤로 걸어요<br>건물 앞에서 누르면 안으로 들어가요</div>
+  <div class="pads"><button class="pad" id="tL" type="button" aria-label="왼쪽으로 걷기">◀</button><button class="pad" id="tR" type="button" aria-label="오른쪽으로 걷기">▶</button></div>
+  <button class="btn enter" id="tEnter" type="button" hidden>들어가기</button>
+  <div class="tpanel" id="tPanel" aria-live="polite"><button class="x" id="tX" type="button" aria-label="닫기">×</button><div id="tBody"></div></div>
+</div>
+
 <header class="top" id="top">
   <div class="wrap">
     <a class="logo" href="#"><i aria-hidden="true"></i>플레이아츠 클럽</a>
@@ -236,6 +321,7 @@ footer small{display:block;margin-top:6px}
       <a href="#teacher">선생님</a>
       <a href="#session">설명회</a>
       <a href="#faq">자주 묻는 질문</a>
+      <a href="#" id="openTown">동네 산책</a>
     </nav>
     <a class="btn" href="sms:01030921433">문자로 문의</a>
   </div>
@@ -354,7 +440,7 @@ footer small{display:block;margin-top:6px}
 </section>
 
 <!-- 포트폴리오 -->
-<section>
+<section id="portfolio">
   <div class="wrap port">
     <img src="images/portfolio.jpg" alt="그림과 사진이 붙은 아이 포트폴리오 일러스트">
     <div>
@@ -626,6 +712,130 @@ footer small{display:block;margin-top:6px}
       n.style.fontSize = (14 + Math.random() * 12) + 'px';
       document.body.appendChild(n); setTimeout(function(){ n.remove(); }, 1000);
     }, {passive:true});
+  })();
+
+  // ===== 동네 산책 =====
+  (function(){
+    var town = document.getElementById('town'); if (!town) return;
+    var world = document.getElementById('tWorld'), sky = document.getElementById('tSky');
+    var panel = document.getElementById('tPanel'), body = document.getElementById('tBody');
+    var enterBtn = document.getElementById('tEnter'), hint = document.getElementById('tHint'), map = document.getElementById('tMap');
+    var W = 4700;
+    world.style.width = W + 'px';
+    var SMS = 'sms:01030921433?body=' + encodeURIComponent('설명회 신청합니다. 이름: / 아이 학년: ');
+    var stops = [
+      {x:760, img:'images/town/b-theater.webp', name:'작은 극장', label:'클럽 소개', go:'#club', html:
+        '<div class="hand">작은 극장</div><h3>여기는 플레이아츠 클럽</h3><p>교육도 치료도 아닙니다. 연극과 음악으로 쌓인 걸 밖으로 꺼내는, 초등 4~6학년 클럽입니다.</p><ul><li>인물이 되어 연극놀이</li><li>북 치고 노래하며 발산</li><li>친구와 마음껏 이야기</li></ul>'},
+      {x:1600, img:'images/town/b-board.webp', name:'동네 게시판', label:'시간표', go:'#schedule', html:
+        '<div class="hand">동네 게시판</div><h3>주 1회, 되는 시간에</h3><div class="mini"><span><b>월 2:30</b>~ 4:00</span><span><b>월 4:00</b>~ 5:30</span><span><b>수 3:30</b>~ 5:00</span><span><b>목 2:30</b>~ 4:00</span></div><p style="margin-top:12px">한 반 6~8명, 3명 이상 모이면 개강합니다. 회비 월 10만원.</p>'},
+      {x:2440, img:'images/town/b-shop.webp', name:'문구점', label:'포트폴리오', go:'#portfolio', html:
+        '<div class="hand">문구점</div><h3>한 달에 한 권, 우리 아이 이야기</h3><p>쓴 글, 활동지, 사진, 만든 것들을 모아 포트폴리오로 드립니다. 매달 한 번 학부모님들이 모여 아이들 활동을 함께 나눕니다.</p>'},
+      {x:3280, img:'images/town/b-house.webp', name:'혜림쌤네 집', label:'선생님', go:'#teacher', html:
+        '<div class="hand">혜림쌤네 집</div><div class="tp"><img src="TCH" alt="혜림쌤"><div><h3 style="margin:0">학교에서 아이들을 만나온 혜림쌤</h3></div></div><ul><li>초등 늘봄·방과후 예술강사, 꿈드림 보컬 강사</li><li>인천대중예술고 기간제 교사·산학겸임교사</li><li>문화예술교육사 2급, 아동청소년심리상담사 1급</li></ul>'},
+      {x:4180, img:'images/town/b-stage.webp', name:'광장 무대', label:'설명회', go:'#session', html:
+        '<div class="hand">광장 무대</div><h3>10월 13일(화) 오후 1시 설명회</h3><p>클럽을 소개하는 학부모 설명회입니다. 참가는 무료이고, 장소는 신청하신 분께 문자로 안내합니다.</p><div class="row"><a class="btn" href="' + SMS + '">문자로 설명회 신청</a></div>'}
+    ];
+    var npcs = [
+      {x:430, img:'images/town/c-star.webp', say:'나 주인공 할래! 극장부터 가 보자'},
+      {x:1220, img:'images/town/c-helper.webp', say:'같이 하자~ 게시판에서 시간 골라 봐'},
+      {x:2890, img:'images/town/c-watcher.webp', say:'…우리 아이는 무슨 유형일까? 눌러 봐', link:'check/'}
+    ];
+    function el(cls, html){ var d = document.createElement('div'); d.className = cls; if (html) d.innerHTML = html; world.appendChild(d); return d; }
+    var sg = el('sign','<div class="board">플레이아츠 동네<small>오른쪽으로 걸어가 보세요 →</small></div><div class="pole"></div>'); sg.style.left = '120px';
+    [330,1140,1980,2860,3720].forEach(function(x){ var t = el('tree','<i></i><b></b>'); t.style.left = x + 'px'; });
+    [1360,2700,3940].forEach(function(x){ var l = el('lamp'); l.style.left = x + 'px'; });
+    var end = el('sign','<div class="board">산책 끝!<small>홈페이지에서 더 보기</small></div><div class="pole"></div>'); end.style.left = (W - 300) + 'px'; end.style.cursor = 'pointer'; end.addEventListener('click', function(){ closeTown('#club'); });
+    stops.forEach(function(s, i){
+      var b = el('bld','<img src="' + s.img + '" alt="' + s.name + '">');
+      b.addEventListener('click', function(){ walkTo = s.x; pendingOpen = i; });
+      s.el = b;
+      var tip = el('tip', s.label + ' 보기'); tip.style.left = s.x + 'px'; tip.addEventListener('click', function(){ openStop(i); }); s.tip = tip;
+      var m = document.createElement('button'); m.type = 'button'; m.textContent = s.label; m.addEventListener('click', function(){ walkTo = s.x; pendingOpen = i; }); map.appendChild(m); s.mapBtn = m;
+    });
+    npcs.forEach(function(n){
+      var d = el('npc','<img src="' + n.img + '" alt=""><span class="say">' + n.say + '</span>'); d.style.left = (n.x - 40) + 'px'; n.el = d;
+      d.addEventListener('click', function(){ if (n.link) { window.location.href = n.link; } else { d.classList.add('show'); setTimeout(function(){ d.classList.remove('show'); }, 2000); } });
+    });
+    var player = document.createElement('div'); player.className = 'player'; player.innerHTML = '<div class="body"><img src="images/town/c-maker.webp" alt="동글이"></div><span class="shadow"></span><span class="say" id="pSay"></span>'; world.appendChild(player);
+    function placeBuildings(){ stops.forEach(function(s){ var w = s.el.offsetWidth || 300; s.el.style.left = (s.x - w/2) + 'px'; }); }
+
+    var px = 260, dir = 1, keys = {L:false, R:false}, walkTo = null, pendingOpen = null, cam = 0, near = -1, lastNear = -1, moved = false, opened = -1;
+    function vw(){ return town.clientWidth; }
+    function setNear(i){
+      if (i === near) return; near = i;
+      stops.forEach(function(s, k){ s.el.classList.toggle('near', k === i); s.tip.classList.toggle('show', k === i && opened !== k); s.mapBtn.classList.toggle('on', k === i); });
+      enterBtn.hidden = (i < 0);
+      if (i >= 0) enterBtn.textContent = stops[i].label + ' 보기';
+    }
+    function openStop(i){
+      opened = i; var s = stops[i];
+      body.innerHTML = s.html.replace('TCH', document.querySelector('.portrait img') ? document.querySelector('.portrait img').src : '') + '<div class="row"><button class="btn ghost" type="button" data-go="' + s.go + '">홈페이지에서 자세히</button></div>';
+      body.querySelector('[data-go]').addEventListener('click', function(){ closeTown(s.go); });
+      panel.classList.add('open'); s.tip.classList.remove('show'); enterBtn.hidden = true;
+    }
+    function closePanel(){ panel.classList.remove('open'); opened = -1; var n = near; near = -2; setNear(n); }
+    document.getElementById('tX').addEventListener('click', closePanel);
+    enterBtn.addEventListener('click', function(){ if (near >= 0) openStop(near); });
+
+    function hold(btn, k){
+      btn.addEventListener('pointerdown', function(e){ e.preventDefault(); keys[k] = true; walkTo = null; });
+      ['pointerup','pointerleave','pointercancel'].forEach(function(ev){ btn.addEventListener(ev, function(){ keys[k] = false; }); });
+    }
+    hold(document.getElementById('tL'), 'L'); hold(document.getElementById('tR'), 'R');
+    window.addEventListener('keydown', function(e){
+      if (town.hidden) return;
+      if (e.key === 'ArrowLeft' || e.key === 'a') { keys.L = true; walkTo = null; e.preventDefault(); }
+      if (e.key === 'ArrowRight' || e.key === 'd') { keys.R = true; walkTo = null; e.preventDefault(); }
+      if ((e.key === ' ' || e.key === 'Enter' || e.key === 'ArrowUp') && near >= 0 && opened < 0) { openStop(near); e.preventDefault(); }
+      if (e.key === 'Escape') { opened >= 0 ? closePanel() : closeTown(); }
+    });
+    window.addEventListener('keyup', function(e){ if (e.key === 'ArrowLeft' || e.key === 'a') keys.L = false; if (e.key === 'ArrowRight' || e.key === 'd') keys.R = false; });
+    town.addEventListener('wheel', function(e){ if (panel.contains(e.target)) return; e.preventDefault(); walkTo = null; px += (Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY) * 0.9; moved = true; }, {passive:false});
+    var tx = null;
+    town.addEventListener('touchstart', function(e){ if (panel.contains(e.target) || e.target.closest('button,a,.bld,.npc')) { tx = null; return; } tx = e.touches[0].clientX; }, {passive:true});
+    town.addEventListener('touchmove', function(e){ if (tx === null) return; var x = e.touches[0].clientX; px -= (x - tx) * 1.4; tx = x; walkTo = null; moved = true; }, {passive:true});
+    town.addEventListener('touchend', function(){ tx = null; });
+
+    var prevPx = px, last = performance.now(), walkingT = 0;
+    function loop(now){
+      if (town.hidden) { requestAnimationFrame(loop); return; }
+      var dt = Math.min(40, now - last) / 16.67; last = now;
+      var v = 0;
+      if (keys.R) v += 7; if (keys.L) v -= 7;
+      if (walkTo !== null) { var d = walkTo - px; if (Math.abs(d) < 8) { walkTo = null; if (pendingOpen !== null) { openStop(pendingOpen); pendingOpen = null; } } else v = Math.sign(d) * Math.min(12, Math.abs(d) * 0.08 + 4); }
+      px += v * dt;
+      px = Math.max(120, Math.min(W - 160, px));
+      var dx = px - prevPx; prevPx = px;
+      if (Math.abs(dx) > 0.3) { dir = dx > 0 ? 1 : -1; walkingT = now; if (!moved) { moved = true; } }
+      if (moved && !hint.classList.contains('gone')) hint.classList.add('gone');
+      player.classList.toggle('walking', now - walkingT < 120);
+      player.querySelector('.body').style.scale = (dir < 0 ? '-1 1' : '1 1');
+      var w = vw(), target = px - w * 0.42;
+      target = Math.max(0, Math.min(W - w, target));
+      cam += (target - cam) * 0.12;
+      world.style.transform = 'translate3d(' + (-cam).toFixed(1) + 'px,0,0)';
+      sky.style.backgroundPosition = (-cam * 0.18).toFixed(1) + 'px 0';
+      player.style.left = (px - player.offsetWidth / 2) + 'px';
+      var ni = -1; stops.forEach(function(s, k){ if (Math.abs(px - s.x) < 170) ni = k; });
+      if (ni !== near) { if (opened >= 0 && ni !== opened) closePanel(); setNear(ni); }
+      npcs.forEach(function(n){ var on = Math.abs(px - n.x) < 150; if (on !== n.on) { n.on = on; n.el.classList.toggle('show', on); } });
+      requestAnimationFrame(loop);
+    }
+    function openTown(){
+      town.hidden = false; document.body.classList.add('town-on'); placeBuildings(); setTimeout(placeBuildings, 400);
+      town.querySelectorAll('img').forEach(function(im){ im.addEventListener('load', placeBuildings, {once:true}); });
+    }
+    function closeTown(go){
+      town.hidden = true; document.body.classList.remove('town-on'); panel.classList.remove('open'); opened = -1;
+      try { sessionStorage.setItem('pa-town', 'seen'); } catch(e){}
+      if (go) { var t = document.querySelector(go); if (t) setTimeout(function(){ t.scrollIntoView({behavior: reduce ? 'auto' : 'smooth'}); }, 60); }
+    }
+    document.getElementById('tSkip').addEventListener('click', function(){ closeTown(); });
+    document.getElementById('openTown').addEventListener('click', function(e){ e.preventDefault(); openTown(); });
+    window.addEventListener('resize', placeBuildings);
+    var seen = false; try { seen = sessionStorage.getItem('pa-town') === 'seen'; } catch(e){}
+    if (!seen && !location.hash) openTown();
+    requestAnimationFrame(loop);
   })();
 })();
 </script>
