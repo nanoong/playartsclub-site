@@ -336,8 +336,8 @@ body.town-on{overflow:hidden}
       <h1>우리 아이,<br>요즘 소리 내서<br>웃은 적 있나요?</h1>
       <div class="flipline" aria-live="off">
         <span>여기서는</span>
-        <span class="flip" id="flip" aria-hidden="true"><span class="on">마음껏 웃습니다</span><span>인물이 됩니다</span><span>북을 칩니다</span><span>친구와 떠듭니다</span><span>스트레스를 비웁니다</span></span>
-        <span class="sr-only" style="position:absolute;left:-9999px">여기서는 마음껏 웃고, 인물이 되고, 북을 치고, 친구와 떠들며 스트레스를 비웁니다.</span>
+        <span class="flip" id="flip" aria-hidden="true"><span class="on">마음껏 웃습니다</span><span>인물이 됩니다</span><span>스트레스를 날립니다</span><span>친구와 떠듭니다</span><span>스트레스를 비웁니다</span></span>
+        <span class="sr-only" style="position:absolute;left:-9999px">여기서는 마음껏 웃고, 인물이 되고, 스트레스를 날리고, 친구와 떠들며 스트레스를 비웁니다.</span>
       </div>
       <p class="lead">학원은 머리를 채우고, 여기서는 스트레스를 비웁니다. 성북구 석관동에서 혜림쌤과 함께하는 초등 고학년 연극·음악 클럽입니다.</p>
       <div class="ctas">
@@ -375,9 +375,9 @@ body.town-on{overflow:hidden}
       </button>
       <button class="act" type="button" aria-expanded="false">
         <img src="images/act-music.jpg" alt="북과 탬버린, 음표 일러스트">
-        <h3>북 치고 노래하며 발산</h3>
+        <h3>노래하고 소리치며 스트레스 해소</h3>
         <span class="tog">한 장면 보기</span>
-        <span class="more">피아노, 전자드럼, 몸으로 치는 박자까지. 오늘 기분을 리듬으로 쳐보고, 음악에 맞춰 몸을 움직입니다. 소리 내는 것만으로도 표정이 달라집니다.</span>
+        <span class="more">노래하고, 소리 지르고, 음악에 맞춰 몸을 흔들며 쌓인 스트레스를 날립니다. 잘하지 않아도 되니까 속이 시원해집니다. 소리 내는 것만으로도 표정이 달라집니다.</span>
       </button>
       <button class="act" type="button" aria-expanded="false">
         <img src="images/act-talk.jpg" alt="마주 앉아 이야기하는 두 아이 일러스트">
@@ -399,7 +399,7 @@ body.town-on{overflow:hidden}
     <div class="steps">
       <div class="step"><div class="t">처음 10분</div><h3>몸 풀기</h3><p>클럽 인사로 시작해 몸과 목소리를 깨웁니다.</p></div>
       <div class="step"><div class="t">그다음</div><h3>연극놀이</h3><p>그날의 이야기 속 인물이 되어 장면을 만듭니다.</p></div>
-      <div class="step"><div class="t">이어서</div><h3>음악과 리듬</h3><p>북, 피아노, 몸 박자로 마음껏 소리를 냅니다.</p></div>
+      <div class="step"><div class="t">이어서</div><h3>스트레스 날리기</h3><p>노래하고 소리치고 몸을 흔들며 마음껏 발산합니다.</p></div>
       <div class="step"><div class="t">마지막</div><h3>나누기</h3><p>오늘 어땠는지 한 마디씩. 그날 활동은 포트폴리오로 남깁니다.</p></div>
     </div>
   </div>
@@ -725,7 +725,7 @@ body.town-on{overflow:hidden}
     var SMS = 'sms:01030921433?body=' + encodeURIComponent('설명회 신청합니다. 이름: / 아이 학년: ');
     var stops = [
       {x:760, img:'images/town/b-theater.webp', name:'작은 극장', label:'클럽 소개', go:'#club', html:
-        '<div class="hand">작은 극장</div><h3>여기는 플레이아츠 클럽</h3><p>교육도 치료도 아닙니다. 연극과 음악으로 쌓인 걸 밖으로 꺼내는, 초등 4~6학년 클럽입니다.</p><ul><li>인물이 되어 연극놀이</li><li>북 치고 노래하며 발산</li><li>친구와 마음껏 이야기</li></ul>'},
+        '<div class="hand">작은 극장</div><h3>여기는 플레이아츠 클럽</h3><p>교육도 치료도 아닙니다. 연극과 음악으로 쌓인 걸 밖으로 꺼내는, 초등 4~6학년 클럽입니다.</p><ul><li>인물이 되어 연극놀이</li><li>노래하고 소리치며 스트레스 해소</li><li>친구와 마음껏 이야기</li></ul>'},
       {x:1600, img:'images/town/b-board.webp', name:'동네 게시판', label:'시간표', go:'#schedule', html:
         '<div class="hand">동네 게시판</div><h3>주 1회, 되는 시간에</h3><div class="mini"><span><b>월 2:30</b>~ 4:00</span><span><b>월 4:00</b>~ 5:30</span><span><b>수 3:30</b>~ 5:00</span><span><b>목 2:30</b>~ 4:00</span></div><p style="margin-top:12px">한 반 6~8명, 3명 이상 모이면 개강합니다. 회비 월 10만원.</p>'},
       {x:2440, img:'images/town/b-shop.webp', name:'문구점', label:'포트폴리오', go:'#portfolio', html:
